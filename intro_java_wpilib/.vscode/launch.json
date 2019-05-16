@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - VariableTypes",
+            "request": "launch",
+            "mainClass": "VariableTypes",
+            "projectName": "intro_java_wpilib_4c15cc13"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Hello",
+            "request": "launch",
+            "mainClass": "Hello",
+            "projectName": "intro_java_wpilib_4c15cc13"
+        }
+    ]
+}
