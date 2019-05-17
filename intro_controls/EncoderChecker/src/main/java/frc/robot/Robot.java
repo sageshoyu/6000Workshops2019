@@ -33,8 +33,7 @@ public class Robot extends TimedRobot {
     enc.setMaxPeriod(5.0); //number of secs between ticks to say mechanism has stopped
     enc.setDistancePerPulse(360/1024); //degrees per tick
     enc.setSamplesToAverage(7);  
-    enc.reset();  
-
+    enc.reset();
   }
 
   /**

@@ -2,6 +2,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - CarDemo",
+            "request": "launch",
+            "mainClass": "CarDemo",
+            "projectName": "intro_java_wpilib_4c15cc13"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FunctionDemo",
+            "request": "launch",
+            "mainClass": "FunctionDemo",
+            "projectName": "intro_java_wpilib_4c15cc13"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - LoopDemo",
+            "request": "launch",
+            "mainClass": "LoopDemo",
+            "projectName": "intro_java_wpilib_4c15cc13"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - BoolDemo",
+            "request": "launch",
+            "mainClass": "BoolDemo",
+            "projectName": "intro_java_wpilib_4c15cc13"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - VariableTypes",
             "request": "launch",
             "mainClass": "VariableTypes",
