@@ -17,7 +17,7 @@ public class ElevatorSensors extends SensorBatch {
     
     private ElevatorSensors() {
         m_lowlimit = new DigitalInput(IO.kELEV_LOWBOUND_PORT);
-        m_highlimit = new DigitalInput(IO.kELEV_UPBOUND_PORT);
+        //m_highlimit = new DigitalInput(IO.kELEV_UPBOUND_PORT);
         m_enc = new Encoder(IO.kELEV_ENC_CHAN_A, IO.kELEV_ENC_CHAN_B, 
             Constants.kELEV_ENC_REVERSE, Constants.kELEV_DECODE_RATE);
         m_enc.setMaxPeriod(Constants.kELEV_ENC_MAXPERIOD); 
@@ -43,7 +43,7 @@ public class ElevatorSensors extends SensorBatch {
        
         HashMap<String, Object> senseOutMap = new HashMap<String, Object>();
         senseOutMap.put(Constants.ELEV_LOWBOUND_OUT,m_lowlimit.get());
-        senseOutMap.put(Constants.ELEV_HIGHBOUND_OUT,m_highlimit.get()); 
+        //senseOutMap.put(Constants.ELEV_HIGHBOUND_OUT,m_highlimit.get()); 
         senseOutMap.put(Constants.ELEV_ENCODER_OUT, elevHeight);
 
         return senseOutMap;

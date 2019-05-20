@@ -12,6 +12,7 @@ import java.util.HashMap;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.controllers.DriveController;
 import frc.robot.controllers.ElevatorController;
 import frc.robot.controllers.SubsystemController;
@@ -64,6 +65,8 @@ public class Robot extends TimedRobot {
     curTime = Timer.getFPGATimestamp();
     dTime = curTime-prevTime;
 
+    SmartDashboard.putNumber("dTime", dTime);
+
     HashMap<String,Object> driveInputs = ControlBoard.getInstance().getDriveInputs();
     //HashMap<String,Object> driveSensorOuts = DriveSensors.getInstance().getUpdate();
 
@@ -75,6 +78,8 @@ public class Robot extends TimedRobot {
   
     Drivetrain.getInstance().update(driveOuts);
     Elevator.getInstance().update(elevatorOuts);
+
+    prevTime = curTime;
   }
 
   @Override
@@ -83,6 +88,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
+    HashMap<String,Object> motorOut = new HashMap<String,Object>();
+    motorOut.put(Constants.DRIVE_LEFT_VOLTAGE, 12.0);
+    motorOut.put(Constants.DRIVE_RIGHT_VOLTAGE, 12.0);
+
+    Drivetrain.getInstance().update(motorOut);
   }
 
 }

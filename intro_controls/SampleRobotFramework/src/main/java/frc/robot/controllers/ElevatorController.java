@@ -26,7 +26,7 @@ public class ElevatorController extends SubsystemController {
         double setpoint = (double)controlInputs.get(Constants.ELEV_SETPOINT);
 
         boolean isLowHit = (boolean)sensorInputs.get(Constants.ELEV_LOWBOUND_OUT);
-        boolean isTopHit = (boolean)sensorInputs.get(Constants.ELEV_HIGHBOUND_OUT);
+        //boolean isTopHit = (boolean)sensorInputs.get(Constants.ELEV_HIGHBOUND_OUT);
         double encoderPos = (double)sensorInputs.get(Constants.ELEV_ENCODER_OUT);
         
 

@@ -16,19 +16,19 @@ public class DriveSensors extends SensorBatch {
 
     private DriveSensors() {
         //TODO: EXTRACT CONSTANTS TO CONSTANTS FILE
-        m_leftEnc = new Encoder(IO.kDRIVE_LEFT_ENC_CHAN_A, IO.kDRIVE_LEFT_ENC_CHAN_B, 
-            Constants.kDRIVE_LEFTENC_REVERSE, Constants.kDRIVE_ENC_DECODE_RATE);
-        m_leftEnc.setMaxPeriod(Constants.kDRIVE_ENC_MAXPERIOD);
-        m_leftEnc.setMinRate(Constants.kDRIVE_ENC_MINRATE);
-        m_leftEnc.setDistancePerPulse(Constants.kDRIVE_ENC_RADIANS_PER_PULSE);
-        m_leftEnc.setSamplesToAverage(7);
+        // m_leftEnc = new Encoder(IO.kDRIVE_LEFT_ENC_CHAN_A, IO.kDRIVE_LEFT_ENC_CHAN_B, 
+        //     Constants.kDRIVE_LEFTENC_REVERSE, Constants.kDRIVE_ENC_DECODE_RATE);
+        // m_leftEnc.setMaxPeriod(Constants.kDRIVE_ENC_MAXPERIOD);
+        // m_leftEnc.setMinRate(Constants.kDRIVE_ENC_MINRATE);
+        // m_leftEnc.setDistancePerPulse(Constants.kDRIVE_ENC_RADIANS_PER_PULSE);
+        // m_leftEnc.setSamplesToAverage(7);
 
-        m_rightEnc = new Encoder(IO.kDRIVE_RIGHT_ENC_CHAN_A, IO.kDRIVE_RIGHT_ENC_CHAN_B,
-            Constants.kDRIVE_RIGHTENC_REVERSE, Constants.kDRIVE_ENC_DECODE_RATE);
-        m_rightEnc.setMaxPeriod(Constants.kDRIVE_ENC_MAXPERIOD);
-        m_rightEnc.setMinRate(Constants.kDRIVE_ENC_MINRATE);
-        m_rightEnc.setDistancePerPulse(Constants.kDRIVE_ENC_RADIANS_PER_PULSE);
-        m_rightEnc.setSamplesToAverage(7);
+        // m_rightEnc = new Encoder(IO.kDRIVE_RIGHT_ENC_CHAN_A, IO.kDRIVE_RIGHT_ENC_CHAN_B,
+        //     Constants.kDRIVE_RIGHTENC_REVERSE, Constants.kDRIVE_ENC_DECODE_RATE);
+        // m_rightEnc.setMaxPeriod(Constants.kDRIVE_ENC_MAXPERIOD);
+        // m_rightEnc.setMinRate(Constants.kDRIVE_ENC_MINRATE);
+        // m_rightEnc.setDistancePerPulse(Constants.kDRIVE_ENC_RADIANS_PER_PULSE);
+        // m_rightEnc.setSamplesToAverage(7);
     }
 
     public static DriveSensors getInstance() {
@@ -43,14 +43,15 @@ public class DriveSensors extends SensorBatch {
     @Override
     public HashMap<String, Object> getUpdate() {
         
-        double leftVel = m_leftEnc.getRate()*Constants.kDRIVE_WHEEL_RADIUS;
-        double rightVel = m_rightEnc.getRate()*Constants.kDRIVE_WHEEL_RADIUS;
+        // double leftVel = m_leftEnc.getRate()*Constants.kDRIVE_WHEEL_RADIUS;
+        // double rightVel = m_rightEnc.getRate()*Constants.kDRIVE_WHEEL_RADIUS;
         
-        HashMap<String, Object> senseOutMap = new HashMap<String, Object>();
-        senseOutMap.put(Constants.DRIVE_LEFT_ENC_OUT, leftVel);
-        senseOutMap.put(Constants.DRIVE_RIGHT_ENC_OUT, rightVel);
+        // HashMap<String, Object> senseOutMap = new HashMap<String, Object>();
+        // senseOutMap.put(Constants.DRIVE_LEFT_ENC_OUT, leftVel);
+        // senseOutMap.put(Constants.DRIVE_RIGHT_ENC_OUT, rightVel);
 
-        return senseOutMap;
+        // return senseOutMap;
+        return null;
     }
 
 

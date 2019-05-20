@@ -2,6 +2,7 @@ package frc.robot.controllers;
 
 import java.util.HashMap;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class DriveController extends SubsystemController {
@@ -26,10 +27,13 @@ public class DriveController extends SubsystemController {
         double leftSetpoint = (double)controlInputs.get(Constants.DRIVE_LEFT_SETPOINT);
         double rightSetpoint = (double)controlInputs.get(Constants.DRIVE_RIGHT_SETPOINT);
 
+        SmartDashboard.putNumber("DriveLeft_Setpoint", leftSetpoint);
+        
+
         // compute desired setpoints with acceleration cap
         if(Math.abs(leftSetpoint - prevFilteredLeftSetpoint) < Constants.kDRIVE_DEADBAND) {
             filteredLeftSetpoint = prevFilteredLeftSetpoint;
-        } else if (leftSetpoint < prevFilteredLeftSetpoint) {
+        } else if (prevFilteredLeftSetpoint < leftSetpoint) {
             filteredLeftSetpoint = Constants.kDRIVE_MAX_ACCEL*dTime + prevFilteredLeftSetpoint;
         } else {
             filteredLeftSetpoint = -Constants.kDRIVE_MAX_ACCEL*dTime + prevFilteredLeftSetpoint;
@@ -37,12 +41,16 @@ public class DriveController extends SubsystemController {
 
         if(Math.abs(rightSetpoint - prevFilteredRightSetpoint) < Constants.kDRIVE_DEADBAND) {
             filteredRightSetpoint = prevFilteredRightSetpoint;
-        } else if (rightSetpoint < prevFilteredRightSetpoint) {
+        } else if (prevFilteredRightSetpoint < rightSetpoint) {
             filteredRightSetpoint = Constants.kDRIVE_MAX_ACCEL*dTime + prevFilteredRightSetpoint;
         } else {
             filteredRightSetpoint = -Constants.kDRIVE_MAX_ACCEL*dTime + prevFilteredRightSetpoint;
         }
 
+        prevFilteredLeftSetpoint = filteredLeftSetpoint;
+        prevFilteredRightSetpoint = filteredRightSetpoint;
+
+        SmartDashboard.putNumber("Filtered_Setpoint", filteredLeftSetpoint);
 
         // dead reckoning feedforward controller
         double leftVoltageOut = Constants.kDRIVE_LEFT_Kf*filteredLeftSetpoint;

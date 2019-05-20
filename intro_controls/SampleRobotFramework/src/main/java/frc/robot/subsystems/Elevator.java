@@ -27,7 +27,7 @@ public class Elevator extends Subsystem {
 
     @Override
     public void update(HashMap<String, Object> outputs) {
-        double voltage = (double)outputs.get(Constants.ELEV_SETPOINT);
+        double voltage = (double)outputs.get(Constants.ELEV_VOLTAGE);
         double motorOut = voltage/12.0;
         m_motor.set(motorOut);
     }
