@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.IO;
 
@@ -23,7 +24,7 @@ public class ElevatorSensors extends SensorBatch {
         m_enc.setMaxPeriod(Constants.kELEV_ENC_MAXPERIOD); 
         m_enc.setMinRate(Constants.kELEV_ENC_MINRATE);
         m_enc.setDistancePerPulse(Constants.kELEV_ENC_RADIANS_PER_PULSE);
-        m_enc.setSamplesToAverage(7); 
+        m_enc.setSamplesToAverage(5); 
     }
 
 
@@ -42,9 +43,14 @@ public class ElevatorSensors extends SensorBatch {
         double elevHeight = m_enc.getDistance()*Constants.kELEV_DRUM_RADIUS;
        
         HashMap<String, Object> senseOutMap = new HashMap<String, Object>();
-        senseOutMap.put(Constants.ELEV_LOWBOUND_OUT,m_lowlimit.get());
+        senseOutMap.put(Constants.ELEV_LOWBOUND_OUT,!m_lowlimit.get()); //Hall effect is closed w/o magnet
         //senseOutMap.put(Constants.ELEV_HIGHBOUND_OUT,m_highlimit.get()); 
         senseOutMap.put(Constants.ELEV_ENCODER_OUT, elevHeight);
+
+        boolean isDown = (boolean)senseOutMap.get(Constants.ELEV_LOWBOUND_OUT);
+        double pos = (double)senseOutMap.get(Constants.ELEV_ENCODER_OUT);
+        SmartDashboard.putBoolean("Elevator_Down", isDown);
+        SmartDashboard.putNumber("Encoder_Pos", pos);
 
         return senseOutMap;
     }

@@ -65,6 +65,14 @@ public class DriveController extends SubsystemController {
         return driveControlOutMap;
     }
 
+    @Override
+    public void disable() {
+        filteredLeftSetpoint = 0.0;
+        filteredRightSetpoint = 0.0;
+        prevFilteredLeftSetpoint = 0.0;
+        prevFilteredRightSetpoint = 0.0;
+    }
+
 
 
 } 

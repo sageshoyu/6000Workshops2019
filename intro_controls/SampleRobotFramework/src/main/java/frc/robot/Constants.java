@@ -22,8 +22,9 @@ public class Constants {
     public static final double kZERO_SPEED = 0.025; //in m/s
     public static final double kELEV_MIN_HEIGHT = 0.02; //determine after measuring elevator in  meters
     public static final double kELEV_MAX_HEIGHT = 0.7;
-    public static final double kELEV_Kp = 0.001; //TUNE ME
+    public static final double kELEV_Kp = 300; 
     public static final double kELEV_Kd = 0; 
+    public static final double kELEV_Kstall = 1.5; // in V
     
 
     /*DRIVETRAIN CONSTANTS*/

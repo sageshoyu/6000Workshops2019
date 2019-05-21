@@ -14,7 +14,7 @@ public class IO {
     public static final int kDRIVE_RIGHT_MOTOR = 1;
 
     //Elevator motors
-    public static final int kELEV_MOTOR = 6;
+    public static final int kELEV_MOTOR = 5;
 
 //SENSOR PORTS
     public static final int kELEV_LOWBOUND_PORT = 0;

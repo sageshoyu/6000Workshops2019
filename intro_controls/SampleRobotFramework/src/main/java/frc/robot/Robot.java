@@ -57,6 +57,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    elevatorController.disable();
+    driveController.disable();
     prevTime = Timer.getFPGATimestamp();
   }
 
@@ -88,11 +90,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
-    HashMap<String,Object> motorOut = new HashMap<String,Object>();
-    motorOut.put(Constants.DRIVE_LEFT_VOLTAGE, 12.0);
-    motorOut.put(Constants.DRIVE_RIGHT_VOLTAGE, 12.0);
-
-    Drivetrain.getInstance().update(motorOut);
+    HashMap<String,Object> senseOut = ElevatorSensors.getInstance().getUpdate();
+    
   }
 
 }
