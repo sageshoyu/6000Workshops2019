@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Spark;
 import frc.robot.Constants;
 import frc.robot.IO;
 
+/*A collection of the necessarry drivetrain motors. No voltage compensation used (just dividing by 12 volts to scale down to -1.0 to 1.0) */
 public class Drivetrain extends Subsystem {
 
     private Spark m_leftMotor;

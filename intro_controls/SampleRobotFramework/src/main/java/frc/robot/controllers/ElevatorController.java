@@ -5,12 +5,16 @@ import java.util.HashMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
+/*Elevator controller that uses a state-machine to control elevator behavior. States are DISABLED (no movement), ZEROING (homing), 
+and RUNNING (feedback control enabled for arbitrary position control). Uses a PID control loop to control movement. */
 public class ElevatorController extends SubsystemController {
 
+    //enumerating states
     private enum State {
         DISABLED, ZEROING, RUNNING
     }
 
+    //when initialized, elevator should be disabled
     public ElevatorController() {
         state = State.DISABLED;
     }
@@ -33,12 +37,12 @@ public class ElevatorController extends SubsystemController {
         SmartDashboard.putNumber("Setpoint",setpoint);
 
         // STATE MACHINE TO CALCULATE DESIRED SETPOINT
-        double kVoltageLimit = 0.0;
+        double kVoltageLimit = 0.0; //thing is is how we have overarcing control over movement - by setting this to zero, no voltage can be outputted
         switch(state) {
             case DISABLED:
 
                 kVoltageLimit = 0.0;
-                filteredSetpoint = encoderPos;
+                filteredSetpoint = encoderPos; //set this in case we transition to ZEROING
 
                 if(shouldZero) state = State.ZEROING;
                 SmartDashboard.putNumber("ELEV_STATE", 0);
@@ -52,7 +56,7 @@ public class ElevatorController extends SubsystemController {
                     offset = -encoderPos;
                     state = State.RUNNING;
                 } else {
-                    filteredSetpoint -= Constants.kZERO_SPEED*dTime;
+                    filteredSetpoint -= Constants.kZERO_SPEED*dTime; //lower target at constant controlled (and low power) rate until home is reached
                 }
 
                 SmartDashboard.putNumber("ELEV_STATE", 1);
@@ -63,10 +67,10 @@ public class ElevatorController extends SubsystemController {
                 kVoltageLimit = 12.0;
                 filteredSetpoint = setpoint;
                 
-                if (filteredSetpoint > Constants.kELEV_MAX_HEIGHT) {
+                if (filteredSetpoint > Constants.kELEV_MAX_HEIGHT) {  //stay within software bounds (which are typically smaller than mechanical to give room for error)
                     filteredSetpoint = Constants.kELEV_MAX_HEIGHT;
                 } else if (filteredSetpoint < Constants.kELEV_MIN_HEIGHT) {
-                    filteredSetpoint = Constants.kELEV_MIN_HEIGHT;
+                    filteredSetpoint = Constants.kELEV_MIN_HEIGHT; 
                 }
 
                 if(shouldZero) state = State.ZEROING;

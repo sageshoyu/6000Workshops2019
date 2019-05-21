@@ -32,9 +32,9 @@ public class DriveController extends SubsystemController {
 
         // compute desired setpoints with acceleration cap
         if(Math.abs(leftSetpoint - prevFilteredLeftSetpoint) < Constants.kDRIVE_DEADBAND) {
-            filteredLeftSetpoint = prevFilteredLeftSetpoint;
-        } else if (prevFilteredLeftSetpoint < leftSetpoint) {
-            filteredLeftSetpoint = Constants.kDRIVE_MAX_ACCEL*dTime + prevFilteredLeftSetpoint;
+            filteredLeftSetpoint = prevFilteredLeftSetpoint;                                    //   if within deadband (i.e. close enough to desired setpoint) 
+        } else if (prevFilteredLeftSetpoint < leftSetpoint) {                                   //   just sit at current setpoint
+            filteredLeftSetpoint = Constants.kDRIVE_MAX_ACCEL*dTime + prevFilteredLeftSetpoint; // using v(t) = a*t + v0 equation
         } else {
             filteredLeftSetpoint = -Constants.kDRIVE_MAX_ACCEL*dTime + prevFilteredLeftSetpoint;
         }
@@ -47,8 +47,8 @@ public class DriveController extends SubsystemController {
             filteredRightSetpoint = -Constants.kDRIVE_MAX_ACCEL*dTime + prevFilteredRightSetpoint;
         }
 
-        prevFilteredLeftSetpoint = filteredLeftSetpoint;
-        prevFilteredRightSetpoint = filteredRightSetpoint;
+        prevFilteredLeftSetpoint = filteredLeftSetpoint;    //the whole prev and current filtered setpoint is extraneous (just use filtered) 
+        prevFilteredRightSetpoint = filteredRightSetpoint;  //but it makes code more readable
 
         SmartDashboard.putNumber("Filtered_Setpoint", filteredLeftSetpoint);
 

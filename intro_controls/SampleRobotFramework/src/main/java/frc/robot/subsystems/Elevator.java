@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Spark;
 import frc.robot.Constants;
 import frc.robot.IO;
 
+/*Collection of necesssary elevator motors (in this example, there is only one). No voltage compensation (dividing by 12.0 to scale to -1.0 to 1.0) */
 public class Elevator extends Subsystem {
 
     private Spark m_motor;

@@ -9,13 +9,16 @@ import frc.robot.IO;
 
 public class DriveSensors extends SensorBatch {
 
+    //Encoders were not installed in the 2019 drivetrain, but this is example code in case you want to install some in the future.
+
     private Encoder m_leftEnc;
     private Encoder m_rightEnc;
     
     private static DriveSensors m_instance = null;
 
     private DriveSensors() {
-        //TODO: EXTRACT CONSTANTS TO CONSTANTS FILE
+        //setting encoder objects to represent rotations in radians. 
+
         // m_leftEnc = new Encoder(IO.kDRIVE_LEFT_ENC_CHAN_A, IO.kDRIVE_LEFT_ENC_CHAN_B, 
         //     Constants.kDRIVE_LEFTENC_REVERSE, Constants.kDRIVE_ENC_DECODE_RATE);
         // m_leftEnc.setMaxPeriod(Constants.kDRIVE_ENC_MAXPERIOD);
@@ -42,7 +45,8 @@ public class DriveSensors extends SensorBatch {
    
     @Override
     public HashMap<String, Object> getUpdate() {
-        
+        //rate will be given in rad/sec, so you must multiply by wheel radius to convert to m/s
+
         // double leftVel = m_leftEnc.getRate()*Constants.kDRIVE_WHEEL_RADIUS;
         // double rightVel = m_rightEnc.getRate()*Constants.kDRIVE_WHEEL_RADIUS;
         

@@ -11,7 +11,6 @@ import java.util.HashMap;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.controllers.DriveController;
 import frc.robot.controllers.ElevatorController;
@@ -34,6 +33,7 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
+
   private double prevTime;
   private double curTime;
   private double dTime;
@@ -57,6 +57,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    //
     elevatorController.disable();
     driveController.disable();
     prevTime = Timer.getFPGATimestamp();
@@ -64,20 +65,24 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    //calculate loop timestep for calculations in controllers
     curTime = Timer.getFPGATimestamp();
     dTime = curTime-prevTime;
-
     SmartDashboard.putNumber("dTime", dTime);
 
+    //read driver input for desired behavior and sensor output for drivetrain feedback loops
     HashMap<String,Object> driveInputs = ControlBoard.getInstance().getDriveInputs();
     //HashMap<String,Object> driveSensorOuts = DriveSensors.getInstance().getUpdate();
 
+    //read driver input for desired behavior and sensor output for elevator feedback loops
     HashMap<String,Object> elevatorInputs = ControlBoard.getInstance().getElevatorInputs();
     HashMap<String,Object> elevatorSensorOuts = ElevatorSensors.getInstance().getUpdate();
 
+    //calculate motor output voltage based on controller feedback loop calculations
     HashMap<String,Object> driveOuts = driveController.getOutput(driveInputs, null, dTime);
     HashMap<String,Object> elevatorOuts = elevatorController.getOutput(elevatorInputs, elevatorSensorOuts, dTime);
   
+    //send voltage outs to motors
     Drivetrain.getInstance().update(driveOuts);
     Elevator.getInstance().update(elevatorOuts);
 
@@ -90,7 +95,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
-    HashMap<String,Object> senseOut = ElevatorSensors.getInstance().getUpdate();
     
   }
 
